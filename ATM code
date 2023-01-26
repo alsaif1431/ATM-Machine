@@ -1,0 +1,108 @@
+class UserDetails:
+    # name = "Tony Stark"
+    # pin = 9988                                #CAN BE DONE USING CLASS ATTRIBUTES ALSO
+    # Bank = "Union Bank Of India"
+    # Balance = 99800
+
+    def __init__(self,name,pin,Bank,Balance):        #CONSTRUCTOR TAKING THE FOLLOWING ARGUEMENTS
+        self.name = name 
+        self.pin = pin
+        self.Bank = Bank
+        self.Balance = Balance
+
+class Userdisplay(UserDetails):                        #CLASS TO DISPLAY THE DETAILS AND GIVE OPTIONS (SINGLE INHERITANCE)
+    def display(self):
+        print(f"""         
+            ---------Greetings {self.name}---------
+               --- Welcome to {self.Bank} ---
+                * Press 0 for Exit or Logout
+                * Press 1 to check Balance
+                * Press 2 for Withdrawal
+                * Press 3 for Deposit
+                * Press 4 for Change of PIN
+                * Press 5 for Card Return
+                """)
+    
+class choice(Userdisplay):                          #CLASS TO PERFORM THE TASK BASED ON THE INPUT CHOICE
+    # u = UserDetails("Shaf",432,"3sfd",323)
+    def choice(self):
+        choice = int(input("Enter your choice: "))
+        if choice == 0:                             #TO EXIT OR LOGOUT
+            print()
+            print("Exiting....")
+            print("Exited Successfully!")
+            print("*"*30)
+            print("Thank You for Banking with us!")
+            exit()
+            
+        elif choice == 1:                                           #FETCHING BALANCE
+            Userpin = int(input("Enter your secret PIN: "))
+            if Userpin == self.pin:
+                print(f"""Your Balance is: {self.Balance}""")
+                print("*"*30)
+                print("Thank You for Banking with us!")
+            else:
+                print("Invalid PIN")
+
+        elif choice == 2:                                           #WITHDRAWAL OF AMOUNT  
+            withdraw = int(input("Enter the amount: "))
+            if withdraw>self.Balance:
+                print("Insufficient Funds!")
+                print("*"*30)
+                print("Thank You for Banking with us!")
+            elif withdraw <=0:
+                print("Enter value greater than 0")
+            else:
+                print()
+                wpin = int(input("Please enter your secret number: "))
+                if wpin == self.pin:
+                    print("Withdrawal....")
+                    print(f"Amount Withdrawn is: {withdraw}")
+                    self.Balance = self.Balance-withdraw
+                    print(f"Current Balance is: {self.Balance}")
+                    print("*"*30)
+                    print("Thank You for Banking with us!")
+                else:
+                    print("Invalid PIN!")
+
+        elif choice == 3:                                                           #DEPOSITING THE AMOUNT
+            deposit = int(input("Enter the amount to deposit: "))
+            print()
+            dpin = int(input("Please enter your secret number: "))
+            if dpin == self.pin:
+                print("Depositing Amount....")
+                print(f"Amount deposited is: {deposit}")
+                self.Balance = self.Balance+deposit
+                print(f"Current Balance is: {self.Balance}")
+                print("*"*30)
+                print("Thank You for Banking with us!")
+            else:
+                print("Invalid PIN!")
+
+        elif choice == 4:                                                               #CHANGE OF PIN
+            currentPIN = int(input("Enter your current PIN: "))
+            if currentPIN == self.pin:
+                newPIN = (int(input("Enter the New PIN: ")))
+                self.pin = newPIN
+                print()
+                print("Updating....")
+                print("PIN Updated Sucessfully!")
+                print("*"*30)
+                print("Thank You for Banking with us!")
+            else:
+                print("Incorrect PIN!")
+
+        elif choice == 5:                                                       #TAKING BACK THE CARD
+            print()
+            print("Card returned sucessfully!")
+            print("Thank You for Banking with us!")
+            exit()
+
+        else:
+            print("Invalid Input!")
+        
+
+c1 = choice("Tony Stark",9988,"Union Bank",267281)                  #INSTANCE OF A CLASS TAKING ARGUEMENTS
+c1.display()                        #CALLING METHODS
+c1.choice()
+print()
